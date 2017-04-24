@@ -34,6 +34,7 @@ from django.utils.encoding import force_unicode
 from olwidget.forms import apply_maps_to_modelform_fields, fix_initial_data, fix_cleaned_data
 from olwidget.widgets import InfoMap
 from olwidget.utils import DEFAULT_PROJ
+import collections
 
 __all__ = ('GeoModelAdmin',)
 
@@ -95,7 +96,7 @@ class GeoModelAdmin(ModelAdmin):
                 for field in self.list_map:
                     geom = getattr(obj, field)
                     if geom:
-                        if callable(geom):
+                        if isinstance(geom, collections.Callable):
                             geom = geom()
                         geoms.append(geom)
                 for geom in geoms:

@@ -11,7 +11,7 @@ class Country(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = u"Countries"
+        verbose_name_plural = "Countries"
 
 class EnergyVortex(models.Model):
     name = models.CharField(max_length=255)
@@ -24,7 +24,7 @@ class EnergyVortex(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = u"Energy vortices"
+        verbose_name_plural = "Energy vortices"
 
 class AlienActivity(models.Model):
     incident_name = models.CharField(max_length=255)
@@ -35,7 +35,7 @@ class AlienActivity(models.Model):
     objects = models.GeoManager()
 
     class Meta:
-        verbose_name_plural = u"Alien activities"
+        verbose_name_plural = "Alien activities"
 
     def __unicode__(self):
         return self.incident_name

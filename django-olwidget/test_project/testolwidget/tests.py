@@ -16,9 +16,9 @@ class TestGoogProjAdmin(TestCase):
         r = c.post('/admin/testolwidget/googprojmodel/add/', {
             "point": 'SRID=900913;POINT(10 10)'
         }, follow=True)
-        self.assertEquals(r.status_code, 200)
+        self.assertEqual(r.status_code, 200)
 
-        self.assertEquals(len(GoogProjModel.objects.all()), 1)
+        self.assertEqual(len(GoogProjModel.objects.all()), 1)
         a = GEOSGeometry("SRID=900913;POINT(10 10)")
         b = GoogProjModel.objects.all()[0].point
         # Floating point comparison -- ensure distance is miniscule.

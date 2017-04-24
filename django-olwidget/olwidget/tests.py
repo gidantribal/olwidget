@@ -132,12 +132,12 @@ class TestForm(TestCase):
     def test_info_map(self):
         # Just ensure that no errors arise from construction and rendering
         mymap = InfoMap([[Point(0, 0, srid=4326), "that"]], {"name": "frata"})
-        unicode(mymap)
+        str(mymap)
         #print(mymap)
 
     def test_modelform_empty(self):
         form = MyModelForm()
-        unicode(form)
+        str(form)
 
     def test_modelform_valid(self):
         form = MyModelForm({'start': "SRID=4326;POINT(0 0)", 
@@ -145,7 +145,7 @@ class TestForm(TestCase):
         self.assertTrue(form.is_bound)
         self.assertTrue(form.is_valid())
         # check order of keys
-        self.assertEqual(form.fields.keys(), 
+        self.assertEqual(list(form.fields.keys()), 
             ['koan', 'start_end', 'love', 'route', 'death']
         )
         form.save()
@@ -162,11 +162,11 @@ class TestForm(TestCase):
 
         form = MyOtherModelForm()
         #print(form)
-        unicode(form)
+        str(form)
 
     def test_modelform_initial(self):
         form = MyModelForm(instance=MyModel.objects.create(start="SRID=4326;POINT(0 0)", route="SRID=4326;LINESTRING(0 0,1 1)"))
-        unicode(form)
+        str(form)
 
     def test_info_modelform(self):
         class MyInfoModelForm(MapModelForm):
@@ -184,9 +184,9 @@ class TestForm(TestCase):
                 'route': "SRID=4326;LINESTRING(0 0,1 1)",
                 'death': False,
             }, instance=instance)
-        self.assertEqual(form.fields.keys(),
+        self.assertEqual(list(form.fields.keys()),
             ['koan', 'start', 'love', 'route', 'death', 'end'])
-        self.assertEquals(form.errors, {})
+        self.assertEqual(form.errors, {})
         form.save()
 
     def test_custom_form(self):
@@ -195,7 +195,7 @@ class TestForm(TestCase):
                 InfoLayerField([["SRID=4326;POINT(0 0)", "Origin"]]),
                 EditableLayerField({'geometry': 'point'}),
             ])
-        unicode(MixedForm())
+        str(MixedForm())
 
     def test_has_changed(self):
         vals = {
@@ -216,8 +216,8 @@ class TestForm(TestCase):
         f1 = SingleStyleMapModelForm()
         f2 = SingleStyleMapModelFormEquivalent()
 
-        self.assertEquals(unicode(f1.media), unicode(f2.media))
-        self.assertEquals(unicode(f1), unicode(f2))
+        self.assertEqual(str(f1.media), str(f2.media))
+        self.assertEqual(str(f1), str(f2))
 
     def test_required(self):
         form = RequirednessForm({
@@ -238,11 +238,11 @@ class TestForm(TestCase):
     def test_custom_template_map_model_form(self):
         form = CustomTemplateMapModelForm()
         for field in ('start', 'route', 'end'):
-            self.assertEquals(unicode(form[field]), u'<h1>Boogah!</h1>\n')
+            self.assertEqual(str(form[field]), '<h1>Boogah!</h1>\n')
 
     def test_mixed_template_map_model_form(self):
         form = MixedTemplateMapModelForm()
         for field in ('start', 'end'):
-            self.assertEquals(unicode(form[field]), u'<h1>Boogah!</h1>\n')
-        self.assertNotEquals(unicode(form['route']), u'<h1>Boogah!</h1>\n')
+            self.assertEqual(str(form[field]), '<h1>Boogah!</h1>\n')
+        self.assertNotEqual(str(form['route']), '<h1>Boogah!</h1>\n')
 

@@ -11,7 +11,7 @@ VERSION = '0.61.0'
 
 # Make data go to the right place.
 # http://groups.google.com/group/comp.lang.python/browse_thread/thread/35ec7b2fed36eaec/2105ee4d9e8042cb
-for scheme in INSTALL_SCHEMES.values():
+for scheme in list(INSTALL_SCHEMES.values()):
     scheme['data'] = scheme['purelib']
 
 setup(name='django-olwidget',

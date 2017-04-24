@@ -40,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'olwidget'
-copyright = u'2012, Charlie DeTar'
+project = 'olwidget'
+copyright = '2012, Charlie DeTar'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -178,8 +178,8 @@ htmlhelp_basename = 'olwidgetdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'olwidget.tex', u'olwidget Documentation',
-   u'Charlie DeTar', 'manual'),
+  ('index', 'olwidget.tex', 'olwidget Documentation',
+   'Charlie DeTar', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -211,6 +211,6 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'olwidget', u'olwidget Documentation',
-     [u'Charlie DeTar'], 1)
+    ('index', 'olwidget', 'olwidget Documentation',
+     ['Charlie DeTar'], 1)
 ]

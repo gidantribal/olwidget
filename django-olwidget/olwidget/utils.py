@@ -2,6 +2,7 @@ import re
 
 from django.conf import settings
 from django.contrib.gis.geos import GEOSGeometry
+from functools import reduce
 
 DEFAULT_PROJ = "4326"
 DEFAULT_OPTIONS = getattr(settings, 'OLWIDGET_DEFAULT_OPTIONS', {})
@@ -26,7 +27,7 @@ def _reduce_url_parts(a, b):
 
 def translate_options(options):
     translated = {}
-    for key, value in options.iteritems():
+    for key, value in options.items():
         new_key = _separated_lowercase_to_lower_camelcase(key)
         # recurse
         if isinstance(value, dict):
@@ -52,7 +53,7 @@ def get_geos(value, srid=DEFAULT_PROJ):
     if value:
         if isinstance(value, GEOSGeometry):
             geos = value
-        elif isinstance(value, basestring):
+        elif isinstance(value, str):
             match = _ewkt_re.match(value)
             if match:
                 geos = GEOSGeometry(match.group('wkt'), match.group('srid'))
